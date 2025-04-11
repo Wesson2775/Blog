@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
 
     // 示例 JSON 数据（实际应从 articles.json 加载）
-    fetch('/articles.json')
+    fetch('./articles.json')
         .then(response => response.json())
         .then(data => {
             renderArticles(data);
