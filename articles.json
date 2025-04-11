@@ -1,0 +1,18 @@
+[
+    {
+        "date": "2025/04/09",
+        "category": "技术笔记",
+        "categoryUrl": "/category/tech/",
+        "title": "Manifest V3 之后如何屏蔽广告：NextDNS",
+        "url": "/2025/6697/",
+        "excerpt": "谷歌更新 Chrome Manifest V3 后，许多广告拦截插件失效。本文介绍 NextDNS，一款注重隐私的 DNS 服务。"
+    },
+    {
+        "date": "2025/04/08",
+        "category": "生活",
+        "categoryUrl": "/category/life/",
+        "title": "春日里的小确幸",
+        "url": "/2025/6696/",
+        "excerpt": "记录春日里的温暖瞬间，生活中的小确幸无处不在。"
+    }
+]

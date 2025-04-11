@@ -1,0 +1,49 @@
+/* 基础样式保持不变，仅调整移动端导航 */
+@media (max-width: 768px) {
+    .ct-drawer-canvas[data-location="left"] #offcanvas {
+        position: fixed;
+        top: 0;
+        left: -250px; /* 从左侧滑入 */
+        width: 250px;
+        height: 100%;
+        background: #fff;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        transition: left 0.3s ease;
+    }
+    #offcanvas.active {
+        left: 0;
+    }
+    .ct-header-trigger {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .mobile-menu ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .mobile-menu a {
+        display: block;
+        padding: 15px;
+        color: #333;
+        text-decoration: none;
+    }
+    .mobile-menu a:hover {
+        background: #f5f5f5;
+    }
+}
+
+/* 文章卡片样式 */
+.entry-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}

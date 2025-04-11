@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Another Dayu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="ct-drawer-canvas" data-location="left">
+        <div id="offcanvas" class="ct-panel" data-behaviour="left-side">
+            <div class="ct-panel-inner">
+                <div class="ct-panel-actions">
+                    <button class="ct-toggle-close">✕</button>
+                </div>
+                <nav class="mobile-menu" data-id="mobile-menu">
+                    <ul>
+                        <li><a href="/" class="ct-menu-link">主页</a></li>
+                        <li><a href="/article" class="ct-menu-link">分类</a></li>
+                        <li><a href="/link-exchange" class="ct-menu-link">友邻</a></li>
+                        <li><a href="/support" class="ct-menu-link">支持</a></li>
+                        <li><a href="/bookshelf" class="ct-menu-link">书架</a></li>
+                        <li><a href="/about" class="ct-menu-link">关于</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <header id="header" class="ct-header">
+        <!-- 桌面端和移动端头部内容保持不变 -->
+        <!-- 省略之前头部代码，仅调整移动端触发器 -->
+        <div data-device="mobile">
+            <div data-row="bottom">
+                <div class="ct-container">
+                    <div data-column="start">
+                        <button data-toggle-panel="#offcanvas" class="ct-header-trigger">☰</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="main" class="site-main">
+        <div class="ct-container">
+            <section>
+                <div class="entries" id="article-list"></div>
+                <nav class="ct-pagination" id="pagination"></nav>
+            </section>
+        </div>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>
