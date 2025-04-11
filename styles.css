@@ -1,4 +1,344 @@
-/* 基础样式保持不变，仅调整移动端导航 */
+/* Reset and Base Styles */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.ct-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.skip-link:focus {
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+}
+
+/* Header Styles */
+.ct-header {
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ct-header [data-row="top"] {
+    border-bottom: 1px solid #eee;
+}
+
+.ct-language-switcher {
+    text-align: right;
+    padding: 10px 0;
+}
+
+.ct-language {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+.ct-language li {
+    margin: 0 5px;
+}
+
+.ct-language a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.ct-language a:hover {
+    color: #007bff;
+}
+
+.site-branding {
+    padding: 20px 0;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+.site-description {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.header-menu-1 ul, .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header-menu-1 ul {
+    display: flex;
+    justify-content: center;
+}
+
+.header-menu-1 li {
+    margin: 0 15px;
+}
+
+.header-menu-1 a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 10px 0;
+    display: block;
+}
+
+.header-menu-1 a:hover, .header-menu-1 .current-menu-item a {
+    color: #007bff;
+}
+
+.ct-search-box {
+    padding: 10px 0;
+    text-align: right;
+}
+
+.ct-search-form {
+    position: relative;
+    display: inline-block;
+}
+
+.ct-search-form input[type="search"] {
+    padding: 8px 40px 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.ct-search-form button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: none;
+    border: none;
+    padding: 0 12px;
+    cursor: pointer;
+}
+
+.ct-search-form button svg {
+    fill: #333;
+}
+
+/* Mobile Header */
+@media (max-width: 768px) {
+    .ct-header [data-device="desktop"] {
+        display: none;
+    }
+    .ct-header [data-device="mobile"] {
+        display: block;
+    }
+    .site-branding {
+        text-align: center;
+    }
+    [data-column="end"] {
+        text-align: right;
+    }
+    .ct-header-search, .ct-header-trigger {
+        display: inline-block;
+        margin-left: 10px;
+        background: none;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+    .ct-header-search svg, .ct-header-trigger svg {
+        fill: #333;
+    }
+    #offcanvas {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100%;
+        background: #fff;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+        transition: right 0.3s ease;
+    }
+    #offcanvas.active {
+        right: 0;
+    }
+    .ct-panel-actions {
+        padding: 10px;
+        text-align: right;
+    }
+    .ct-toggle-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .ct-toggle-close svg {
+        fill: #333;
+    }
+    .mobile-menu li {
+        border-bottom: 1px solid #eee;
+    }
+    .mobile-menu a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+        color: #333;
+    }
+    .mobile-menu a:hover {
+        background: #f5f5f5;
+    }
+    #search-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.95);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+    #search-modal.active {
+        display: flex;
+    }
+    #search-modal .ct-panel-content {
+        width: 90%;
+        max-width: 500px;
+    }
+    #search-modal .ct-search-form {
+        display: flex;
+        align-items: center;
+    }
+    #search-modal input[type="search"] {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+    }
+    #search-modal button {
+        position: static;
+    }
+}
+
+@media (min-width: 769px) {
+    .ct-header [data-device="mobile"] {
+        display: none;
+    }
+}
+
+/* Main Content */
+.site-main {
+    padding: 40px 0;
+}
+
+[data-vertical-spacing="top:bottom"] {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.entries {
+    display: grid;
+    gap: 30px;
+}
+
+.entry-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.entry-meta {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    gap: 10px;
+}
+
+.entry-meta li {
+    display: inline-block;
+}
+
+.entry-meta a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.entry-meta a:hover {
+    text-decoration: underline;
+}
+
+.entry-title {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.entry-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+.entry-title a:hover {
+    color: #007bff;
+}
+
+.entry-excerpt {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Pagination */
+.ct-pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.page-numbers {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.page-numbers.current, .page-numbers:hover {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.page-numbers.dots {
+    border: none;
+    background: none;
+}
+
+.ct-hidden-sm {
+    display: block;
+}
+
+/* 移动端导航样式 */
 @media (max-width: 768px) {
     .ct-drawer-canvas[data-location="left"] #offcanvas {
         position: fixed;
@@ -6,12 +346,44 @@
         left: -250px; /* 从左侧滑入 */
         width: 250px;
         height: 100%;
-        background: #fff;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        background: #fff; /* 背景色 */
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* 右侧阴影 */
         transition: left 0.3s ease;
+        z-index: 1000; /* 确保在最上层 */
     }
     #offcanvas.active {
         left: 0;
+    }
+    .ct-panel-actions {
+        padding: 10px;
+        text-align: right;
+        border-bottom: 1px solid #eee; /* 顶部关闭按钮区域分隔线 */
+    }
+    .ct-toggle-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+    }
+    .mobile-menu ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .mobile-menu li {
+        border-bottom: 1px solid #eee; /* 菜单项分隔线 */
+    }
+    .mobile-menu a {
+        display: block;
+        padding: 15px 20px;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .mobile-menu a:hover {
+        background: #f5f5f5; /* 悬停背景色 */
     }
     .ct-header-trigger {
         position: absolute;
@@ -20,30 +392,7 @@
         background: none;
         border: none;
         font-size: 24px;
+        color: #333;
         cursor: pointer;
     }
-    .mobile-menu ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-    .mobile-menu a {
-        display: block;
-        padding: 15px;
-        color: #333;
-        text-decoration: none;
-    }
-    .mobile-menu a:hover {
-        background: #f5f5f5;
-    }
-}
-
-/* 文章卡片样式 */
-.entry-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
