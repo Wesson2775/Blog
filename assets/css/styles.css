@@ -293,3 +293,39 @@ li {
 .footer a:hover {
     color: #dd3737;
 }
+/* 分页样式 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination a, 
+.pagination span {
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: 1px solid #ddd;
+  color: #dd3737;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.pagination a:hover {
+  background: #dd3737;
+  color: white;
+  border-color: #dd3737;
+}
+
+.pagination .current {
+  background: #dd3737;
+  color: white;
+  border-color: #dd3737;
+}
+
+.pagination .disabled {
+  color: #aaa;
+  border-color: #eee;
+  pointer-events: none;
+}
