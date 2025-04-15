@@ -39,7 +39,7 @@
         </div>
         <div class="article">
             <ul>
-                {% for post in paginator.posts %}
+                {% for post in site.docs limit:5 %}
                 <li>
                     <div class="article-data">
                         <div class="article-data-date">
@@ -57,27 +57,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="page-nav">
-            <ul id="pagination">
-                {% if paginator.previous_page %}
-                    <li><a href="{{ paginator.previous_page_path | relative_url }}">上一页</a></li>
-                {% else %}
-                    <li><a class="disabled">上一页</a></li>
-                {% endif %}
-                {% for page in (1..paginator.total_pages) %}
-                    {% if page == paginator.page %}
-                        <li><a class="active">{{ page }}</a></li>
-                    {% else %}
-                        <li><a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                {% if paginator.next_page %}
-                    <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">下一页</a></li>
-                {% else %}
-                    <li><a class="disabled next-page">下一页</a></li>
-                {% endif %}
-            </ul>
-        </div>
+        
         <footer class="footer">
             <p>© 2021 - {{ 'now' | date: "%Y" }} Dayu ﹒ CC BY-NC-ND 4.0</p>
             <p><a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ <a href="{{ '/rss' | relative_url }}">RSS</a></p>
