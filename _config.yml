@@ -19,3 +19,10 @@ defaults:
       type: docs
     values:
       layout: post
+# 替换原来的分页配置
+pagination:
+  enabled: true
+  collection: 'docs'  # 指定对docs集合分页
+  per_page: 5
+  permalink: '/page/:num/'
+  title: ':title - 第:num页'
