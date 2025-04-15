@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Blog/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>An Dabe</title>
+</head>
+<body>
+    <div class="main-container">
+    <div class="header">
+        <div class="header-top">
+            <div class="lang">
+                <a href="/Blog/index-zh.html" class="lang-link active">ZH</a>
+                <a href="/Blog/index-en.html" class="lang-link">EN</a>
+            </div>
+        </div>
+        <div class="header-middle">
+            <h1>An Dabe</h1>
+            <p>"seize the day, gather ye rosebuds while ye may."</p>
+        </div>
+        <div class="header-bottom">
+            <div class="header-bottom-nav">
+                <ul>
+                    <li><a href="/Blog/">首页</a></li>
+                    <li><a href="/Blog/categories">分类</a></li>
+                    <li><a href="/Blog/friends">友邻</a></li>
+                    <li><a href="/Blog/support">支持</a></li>
+                    <li><a href="/Blog/bookshelf">书架</a></li>
+                    <li><a href="/Blog/about">关于</a></li>
+                </ul>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="搜索...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+    </div>
+    <!-- index.html 关键修改 -->
+    <div class="article">
+        <ul>
+        
+        </ul>
+    </div>
+    <div class="page-nav">
+        <ul id="pagination">
+            
+                <li><a class="disabled">上一页</a></li>
+            
+            
+            
+                <li><a class="disabled next-page">下一页</a></li>
+            
+        </ul>
+    </div>
+    <footer class="footer">
+        <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
+        <p><a href="/Blog/analytics">Analytics</a> ﹒ <a href="/Blog/rss">RSS</a></p>
+    </footer>
+</div>
+<button class="back-to-top" title="回到顶部">
+    <i class="fas fa-arrow-up"></i>
+</button>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const langLinks = document.querySelectorAll('.lang-link');
+        const savedLang = localStorage.getItem('lang') || 'zh';
+
+        langLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.textContent.toLowerCase() === savedLang) {
+                link.classList.add('active');
+            }
+
+            link.addEventListener('click', (e) => {
+                langLinks.forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+                localStorage.setItem('lang', e.target.textContent.toLowerCase());
+            });
+        });
+
+        const backToTopButton = document.querySelector('.back-to-top');
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+    });
+</script>
+        
+        
+</body>
+</html>
