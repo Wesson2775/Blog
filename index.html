@@ -37,12 +37,89 @@
                 </div>
             </div>
         </div>
-        <!-- 文章和分页部分保持不变 -->
+        <div class="article">
+            <ul>
+                {% for post in paginator.posts %}
+                <li>
+                    <div class="article-data">
+                        <div class="article-data-date">
+                            <p>{{ post.date | date: "%Y/%m/%d" }}</p>
+                        </div>
+                        <div class="article-data-tag">
+                            <p>{{ post.tags | first }}</p>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <a href="{{ post.url | relative_url }}"><h2>{{ post.title }}</h2></a>
+                        <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="page-nav">
+            <ul id="pagination">
+                {% if paginator.previous_page %}
+                    <li><a href="{{ paginator.previous_page_path | relative_url }}">上一页</a></li>
+                {% else %}
+                    <li><a class="disabled">上一页</a></li>
+                {% endif %}
+                {% for page in (1..paginator.total_pages) %}
+                    {% if page == paginator.page %}
+                        <li><a class="active">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if paginator.next_page %}
+                    <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">下一页</a></li>
+                {% else %}
+                    <li><a class="disabled next-page">下一页</a></li>
+                {% endif %}
+            </ul>
+        </div>
         <footer class="footer">
             <p>© 2021 - {{ 'now' | date: "%Y" }} Dayu ﹒ CC BY-NC-ND 4.0</p>
             <p><a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ <a href="{{ '/rss' | relative_url }}">RSS</a></p>
         </footer>
     </div>
-    <!-- JavaScript 和其他部分保持不变 -->
+    <button class="back-to-top" title="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const langLinks = document.querySelectorAll('.lang-link');
+            const savedLang = localStorage.getItem('lang') || 'zh';
+
+            langLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.toLowerCase() === savedLang) {
+                    link.classList.add('active');
+                }
+
+                link.addEventListener('click', (e) => {
+                    langLinks.forEach(l => l.classList.remove('active'));
+                    e.target.classList.add('active');
+                    localStorage.setItem('lang', e.target.textContent.toLowerCase());
+                });
+            });
+
+            const backToTopButton = document.querySelector('.back-to-top');
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
