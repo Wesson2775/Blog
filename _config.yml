@@ -19,10 +19,15 @@ defaults:
       type: docs
     values:
       layout: post
-# 替换原来的分页配置
+# 分页配置
 pagination:
   enabled: true
-  collection: 'docs'  # 指定对docs集合分页
-  per_page: 5
-  permalink: '/page/:num/'
-  title: ':title - 第:num页'
+  collection: docs       # 对哪个集合分页
+  per_page: 5           # 每页文章数
+  permalink: "/page/:num/" # 分页路径格式
+  limit: 0              # 0表示无限制
+  sort_field: "date"    # 按日期排序
+  sort_reverse: true    # 倒序排列
+  trail: 
+    before: 2           # 当前页前显示2个页码
+    after: 2            # 当前页后显示2个页码
