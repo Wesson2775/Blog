@@ -1,7 +1,7 @@
 title: An Dabe
 description: "seize the day, gather ye rosebuds while yemay."
-baseurl: ""
-url: ""
+baseurl: "wesson2775.github.io"
+url: "blog"
 timezone: Asia/Shanghai
 markdown: kramdown
 permalink: pretty
