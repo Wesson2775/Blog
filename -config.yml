@@ -1,19 +1,22 @@
 title: An Dabe
-description: "seize the day, gather ye rosebuds while yemay."
+description: Seize the day, gather ye rosebuds while ye may.
 baseurl: "wesson2775.github.io"
-url: "blog"
-timezone: Asia/Shanghai
+url: "Blog"
 markdown: kramdown
-permalink: pretty
-paginate: 5
-paginate_path: "/page:num/"
-
+theme: minima
 plugins:
-  - jekyll-paginate
   - jekyll-feed
-  - jekyll-seo-tag
+  - jekyll-paginate
+paginate: 5
+paginate_path: "/page/:num/"
+collections:
+  docs:
+    output: true
+    permalink: /docs/:name
 defaults:
   - scope:
       path: ""
+      type: docs
     values:
-      layout: default
+      layout: post
+
