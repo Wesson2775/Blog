@@ -1,0 +1,19 @@
+title: An Dabe
+description: "seize the day, gather ye rosebuds while yemay."
+baseurl: ""
+url: ""
+timezone: Asia/Shanghai
+markdown: kramdown
+permalink: pretty
+paginate: 5
+paginate_path: "/page:num/"
+
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
