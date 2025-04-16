@@ -1,99 +1,18 @@
 ---
-layout: default
+layout: base
 title: 友邻
 ---
-<div class="main-container">
-    <!-- 抬头（与 index.html 一致） -->
-    <div class="header">
-        <div class="header-top">
-            <div class="lang">
-                <a href="{{ '/index-zh.html' | relative_url }}" class="lang-link active">ZH</a>
-                <a href="{{ '/index-en.html' | relative_url }}" class="lang-link">EN</a>
-            </div>
-        </div>
-        <div class="header-middle">
-            <h1>An Dabe</h1>
-            <p>"seize the day, gather ye rosebuds while ye may."</p>
-        </div>
-        <div class="header-bottom">
-            <div class="header-bottom-nav">
-                <ul>
-                    <li><a href="{{ '/' | relative_url }}">首页</a></li>
-                    <li><a href="{{ '/fragments' | relative_url }}">分类</a></li>
-                    <li><a href="{{ '/friends' | relative_url }}">友邻</a></li>
-                    <li><a href="{{ '/tags' | relative_url }}">标签</a></li>
-                    <li><a href="{{ '/bookshelf' | relative_url }}">书架</a></li>
-                    <li><a href="{{ '/about' | relative_url }}">关于</a></li>
-                </ul>
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="搜索...">
-                <i class="fas fa-search search-icon"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- 友邻内容 -->
-    <div class="article">
-        <h2>友邻</h2>
-        <ul>
-            <li>
-                <a href="https://example.com" target="_blank">示例博客</a>
-                <p>一个充满创意和灵感的个人博客，分享技术、旅行和生活点滴。</p>
-            </li>
-            <li>
-                <a href="https://another-example.com" target="_blank">另一个朋友</a>
-                <p>专注于摄影和艺术，记录生活中的美好瞬间。</p>
-            </li>
-            <!-- 可根据需要添加更多友邻 -->
-        </ul>
-    </div>
-
-    <!-- 页尾（与 index.html 一致） -->
-    <footer class="footer">
-        <p>© 2021 - {{ 'now' | date: "%Y" }} Dayu ﹒ CC BY-NC-ND 4.0</p>
-        <p><a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ <a href="{{ '/rss' | relative_url }}">RSS</a></p>
-    </footer>
+<div class="article">
+    <h2>友邻</h2>
+    <ul>
+        <li>
+            <a href="https://example.com" target="_blank">示例博客</a>
+            <p>一个充满创意和灵感的个人博客，分享技术、旅行和生活点滴。</p>
+        </li>
+        <li>
+            <a href="https://another-example.com" target="_blank">另一个朋友</a>
+            <p>专注于摄影和艺术，记录生活中的美好瞬间。</p>
+        </li>
+        <!-- 可根据需要添加更多友邻 -->
+    </ul>
 </div>
-
-<!-- 回到顶部按钮（与 index.html 一致） -->
-<button class="back-to-top" title="回到顶部">
-    <i class="fas fa-arrow-up"></i>
-</button>
-
-<!-- JavaScript（与 index.html 一致） -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const langLinks = document.querySelectorAll('.lang-link');
-        const savedLang = localStorage.getItem('lang') || 'zh';
-
-        langLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.textContent.toLowerCase() === savedLang) {
-                link.classList.add('active');
-            }
-
-            link.addEventListener('click', (e) => {
-                langLinks.forEach(l => l.classList.remove('active'));
-                e.target.classList.add('active');
-                localStorage.setItem('lang', e.target.textContent.toLowerCase());
-            });
-        });
-
-        const backToTopButton = document.querySelector('.back-to-top');
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-        });
-    });
-</script>

@@ -1,14 +1,33 @@
-/* 重置默认样式 */
+@use "sass:math";
+@use "sass:color";
+
+// 引入 Minima 主题（使用 @use 替代 @import）
+@use "minima/base" as minima-base;
+@use "minima/layout" as minima-layout;
+@use "minima/syntax-highlighting" as minima-syntax;
+
+// 自定义变量，替换 Minima 的默认值
+$grey-color: #828282;
+$grey-color-light: color.adjust($grey-color, $lightness: 40%);
+$grey-color-dark: color.adjust($grey-color, $lightness: -25%);
+$brand-color: #2a7ae2;
+$text-color: #111;
+$spacing-unit: 30px;
+
+// 引入 Minima 的样式
+@include minima-base.base;
+@include minima-layout.layout;
+@include minima-syntax.syntax-highlighting;
+
+// 自定义样式
 * {
     box-sizing: border-box;
 }
 
-/* 全局移除 <a> 标签默认下划线 */
 a {
     text-decoration: none;
 }
 
-/* 保持原 body 样式 */
 body {
     margin: 0;
     background-image: url('/Blog/assets/images/background.png');
