@@ -37,7 +37,7 @@ title: 标签
     <div class="article">
         <h2>标签</h2>
         <ul class="tag-list">
-            {% assign all_tags = site.posts | map: "tags" | join: "," | split: "," | uniq | sort %}
+            {% assign all_tags = site.posts | map: "tags" | flatten | uniq | sort %}
             {% for tag in all_tags %}
             <li>
                 <a href="{{ '/tags/' | append: tag | relative_url }}">{{ tag }}</a>

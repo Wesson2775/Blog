@@ -36,8 +36,9 @@ layout: default
     <div class="article">
         <h2>标签: {{ page.tag }}</h2>
         <ul>
-        {% if site.tags[page.tag] %}
-        {% assign sorted_posts = site.tags[page.tag] | sort: 'date' | reverse %}
+        {% assign tag_posts = site.posts | where_exp: "post", "post.tags contains page.tag" %}
+        {% if tag_posts.size > 0 %}
+        {% assign sorted_posts = tag_posts | sort: 'date' | reverse %}
         {% for post in sorted_posts %}
         <li>
             <div class="article-data">
