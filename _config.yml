@@ -7,28 +7,24 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-paginate
-# _config.yml 必须包含以下配置
+
 collections:
-  docs:
+  fragments:
     output: true
-    permalink: /:path/
-    title: Docs
+    permalink: /fragments/:path/
 
 defaults:
   - scope:
-      path: "_docs"  # 明确指定路径
-      type: docs
+      path: "_posts"
+      type: posts
     values:
       layout: post
+  - scope:
+      path: "_fragments"
+      type: fragments
+    values:
+      layout: fragments
+
 # 分页配置
-pagination:
-  enabled: true
-  collection: docs       # 对哪个集合分页
-  per_page: 5           # 每页文章数
-  permalink: "/page/:num/" # 分页路径格式
-  limit: 0              # 0表示无限制
-  sort_field: "date"    # 按日期排序
-  sort_reverse: true    # 倒序排列
-  trail: 
-    before: 2           # 当前页前显示2个页码
-    after: 2            # 当前页后显示2个页码
+paginate: 5
+paginate_path: "/page/:num/"

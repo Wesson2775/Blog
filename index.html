@@ -18,9 +18,9 @@ title: An Dabe
             <div class="header-bottom-nav">
                 <ul>
                     <li><a href="{{ '/' | relative_url }}">首页</a></li>
-                    <li><a href="{{ '/categories' | relative_url }}">分类</a></li>
+                    <li><a href="{{ '/fragments' | relative_url }}">分类</a></li>
                     <li><a href="{{ '/friends' | relative_url }}">友邻</a></li>
-                    <li><a href="{{ '/support' | relative_url }}">支持</a></li>
+                    <li><a href="{{ '/tags' | relative_url }}">标签</a></li>
                     <li><a href="{{ '/bookshelf' | relative_url }}">书架</a></li>
                     <li><a href="{{ '/about' | relative_url }}">关于</a></li>
                 </ul>
@@ -31,27 +31,28 @@ title: An Dabe
             </div>
         </div>
     </div>
-    <!-- index.html 关键修改 -->
+    <!-- 文章列表 -->
     <div class="article">
         <ul>
-        {% for doc in site.docs %}  <!-- 注意是site.docs不是site.posts -->
+        {% for doc in paginator.posts %}
         <li>
             <div class="article-data">
-            <div class="article-data-date">
-                <p>{{ doc.date | date: "%Y/%m/%d" }}</p>
-            </div>
-            <div class="article-data-tag">
-                <p>{{ doc.tags | first }}</p>
-            </div>
+                <div class="article-data-date">
+                    <p>{{ doc.date | date: "%Y/%m/%d" }}</p>
+                </div>
+                <div class="article-data-tag">
+                    <p>{{ doc.tags | first }}</p>
+                </div>
             </div>
             <div class="article-content">
-            <a href="{{ doc.url }}"><h2>{{ doc.title }}</h2></a>
-            <p>{{ doc.excerpt | strip_html | truncate: 150 }}</p>
+                <a href="{{ doc.url | relative_url }}"><h2>{{ doc.title }}</h2></a>
+                <p>{{ doc.excerpt | strip_html | truncate: 150 }}</p>
             </div>
         </li>
         {% endfor %}
         </ul>
     </div>
+    <!-- 分页导航 -->
     <div class="page-nav">
         <ul id="pagination">
             {% if paginator.previous_page %}
@@ -62,8 +63,10 @@ title: An Dabe
             {% for page in (1..paginator.total_pages) %}
                 {% if page == paginator.page %}
                     <li><a class="active">{{ page }}</a></li>
+                {% elsif page == 1 %}
+                    <li><a href="{{ '/' | relative_url }}">{{ page }}</a></li>
                 {% else %}
-                    <li><a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a></li>
+                    <li><a href="{{ '/page/' | append: page | relative_url }}">{{ page }}</a></li>
                 {% endif %}
             {% endfor %}
             {% if paginator.next_page %}
@@ -116,5 +119,3 @@ title: An Dabe
         });
     });
 </script>
-        
-        

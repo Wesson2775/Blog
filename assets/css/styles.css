@@ -17,12 +17,12 @@ body {
     background-position: center;
     min-height: 100vh;
 }
+
 .main-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 794px;
-    height: 1080px;
     margin: 0 auto;
     padding: 0;
 }
@@ -59,18 +59,19 @@ body {
     height: 163px;
     font-family: 'Times New Roman', Times, serif;
     color: #ebebeb;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .header-middle h1 {
     margin: 0;
-    height: 65px;
-    line-height: 65px;
+    font-size: 2em;
 }
 
 .header-middle p {
     margin: 0;
-    height: 20px;
-    line-height: 20px;
+    font-size: 1em;
 }
 
 .header-bottom {
@@ -189,6 +190,32 @@ li {
     font-size: 13px;
 }
 
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag-list li {
+    display: inline-block;
+    margin: 0;
+}
+
+.tag-list li a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #333;
+    color: #ebebeb;
+    border-radius: 5px;
+    font-size: 12px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tag-list li a:hover {
+    background-color: #dd3737;
+    color: #fff;
+}
+
 .page-nav {
     margin: 20px 0;
     text-align: center;
@@ -293,40 +320,4 @@ li {
 
 .footer a:hover {
     color: #dd3737;
-}
-/* 分页样式 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin: 30px 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pagination a, 
-.pagination span {
-  padding: 8px 16px;
-  margin: 0 4px;
-  border: 1px solid #ddd;
-  color: #dd3737;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.pagination a:hover {
-  background: #dd3737;
-  color: white;
-  border-color: #dd3737;
-}
-
-.pagination .current {
-  background: #dd3737;
-  color: white;
-  border-color: #dd3737;
-}
-
-.pagination .disabled {
-  color: #aaa;
-  border-color: #eee;
-  pointer-events: none;
 }

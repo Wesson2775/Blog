@@ -32,22 +32,32 @@ layout: default
         </div>
     </div>
 
-    <!-- 博客内容 -->
+    <!-- 标签文章列表 -->
     <div class="article">
-        <article>
-            <h1>{{ page.title }}</h1>
+        <h2>标签: {{ page.tag }}</h2>
+        <ul>
+        {% if site.tags[page.tag] %}
+        {% assign sorted_posts = site.tags[page.tag] | sort: 'date' | reverse %}
+        {% for post in sorted_posts %}
+        <li>
             <div class="article-data">
                 <div class="article-data-date">
-                    <p>{{ page.date | date: "%Y/%m/%d" }}</p>
+                    <p>{{ post.date | date: "%Y/%m/%d" }}</p>
                 </div>
                 <div class="article-data-tag">
-                    <p>{{ page.tags | first }}</p>
+                    <p>{{ post.tags | first }}</p>
                 </div>
             </div>
             <div class="article-content">
-                {{ content }}
+                <a href="{{ post.url | relative_url }}"><h2>{{ post.title }}</h2></a>
+                <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
             </div>
-        </article>
+        </li>
+        {% endfor %}
+        {% else %}
+        <p>该标签下暂无文章。</p>
+        {% endif %}
+        </ul>
     </div>
 
     <!-- 页尾（与 index.html 一致） -->

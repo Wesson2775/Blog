@@ -1,8 +1,7 @@
-source "https://rubygems.org"
+source "https://gems.ruby-china.com/"
 
 gem "jekyll"
 gem "minima"
 gem "jekyll-feed"
 gem "jekyll-paginate"
-gem "jekyll-paginate-v2"
 gem "github-pages", group: :jekyll_plugins

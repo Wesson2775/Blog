@@ -1,13 +1,20 @@
----
-layout: default
----
-<div class="main-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Blog/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>随笔</title>
+</head>
+<body>
+    <div class="main-container">
     <!-- 抬头（与 index.html 一致） -->
     <div class="header">
         <div class="header-top">
             <div class="lang">
-                <a href="{{ '/index-zh.html' | relative_url }}" class="lang-link active">ZH</a>
-                <a href="{{ '/index-en.html' | relative_url }}" class="lang-link">EN</a>
+                <a href="/Blog/index-zh.html" class="lang-link active">ZH</a>
+                <a href="/Blog/index-en.html" class="lang-link">EN</a>
             </div>
         </div>
         <div class="header-middle">
@@ -17,12 +24,12 @@ layout: default
         <div class="header-bottom">
             <div class="header-bottom-nav">
                 <ul>
-                    <li><a href="{{ '/' | relative_url }}">首页</a></li>
-                    <li><a href="{{ '/fragments' | relative_url }}">分类</a></li>
-                    <li><a href="{{ '/friends' | relative_url }}">友邻</a></li>
-                    <li><a href="{{ '/tags' | relative_url }}">标签</a></li>
-                    <li><a href="{{ '/bookshelf' | relative_url }}">书架</a></li>
-                    <li><a href="{{ '/about' | relative_url }}">关于</a></li>
+                    <li><a href="/Blog/">首页</a></li>
+                    <li><a href="/Blog/fragments">分类</a></li>
+                    <li><a href="/Blog/friends">友邻</a></li>
+                    <li><a href="/Blog/tags">标签</a></li>
+                    <li><a href="/Blog/bookshelf">书架</a></li>
+                    <li><a href="/Blog/about">关于</a></li>
                 </ul>
             </div>
             <div class="search-container">
@@ -32,28 +39,35 @@ layout: default
         </div>
     </div>
 
-    <!-- 博客内容 -->
+    <!-- 随笔列表 -->
     <div class="article">
-        <article>
-            <h1>{{ page.title }}</h1>
+        <ul>
+        
+        
+        <li>
             <div class="article-data">
                 <div class="article-data-date">
-                    <p>{{ page.date | date: "%Y/%m/%d" }}</p>
-                </div>
-                <div class="article-data-tag">
-                    <p>{{ page.tags | first }}</p>
+                    <p>2024/09/04</p>
                 </div>
             </div>
             <div class="article-content">
-                {{ content }}
+                <p>
+
+date: 2024-09-04
+
+今天阳光明媚，微风轻轻吹过，感觉整个世界都充满了生机。坐在窗边，喝着一杯咖啡，思绪飘向远方，想起那些过去的日子，仿佛还在眼前。
+</p>
+                <a href="/Blog/fragments/2024-09-04-example/">阅读全文</a>
             </div>
-        </article>
+        </li>
+        
+        </ul>
     </div>
 
     <!-- 页尾（与 index.html 一致） -->
     <footer class="footer">
-        <p>© 2021 - {{ 'now' | date: "%Y" }} Dayu ﹒ CC BY-NC-ND 4.0</p>
-        <p><a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ <a href="{{ '/rss' | relative_url }}">RSS</a></p>
+        <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
+        <p><a href="/Blog/analytics">Analytics</a> ﹒ <a href="/Blog/rss">RSS</a></p>
     </footer>
 </div>
 
@@ -98,3 +112,5 @@ layout: default
         });
     });
 </script>
+</body>
+</html>
