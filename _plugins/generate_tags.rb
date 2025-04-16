@@ -5,8 +5,10 @@ module Jekyll
     safe true
 
     def generate(site)
-      all_tags = site.posts.docs.map { |post| post.data['tags'] }.flatten.uniq.compact
+      # 从所有文章中提取唯一标签
+      all_tags = site.posts.map { |post| post.data['tags'] }.flatten.uniq.compact
       all_tags.each do |tag|
+        # 为每个标签生成一个页面
         site.pages << TagPage.new(site, site.source, tag)
       end
     end
