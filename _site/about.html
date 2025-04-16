@@ -11,23 +11,92 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <section class="about-content">
-  <p></p>
-  <figure>
-    <img src="" width="200" height="150" alt="Wesson的头像">
-  </figure>
-  <div class="about-link">
-    <svg width="19" height="19" viewBox="0 0 24 24" aria-label="邮箱图标" fill="none">
-      <path d="M12.55 14.63L19.45 10a1 1 0 0 1 1.55.83V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.87a1 1 0 0 1 1.55-.87l6.9 4.59a1 1 0 0 0 1.1 0z" style="fill: #2ca9bc; stroke-width: 2;" />
-      <path d="M16 3V5h2M11.45 14.63a1 1 0 0 0 1.1 0L18 11V5L16 3H7a1 1 0 0 0-1 4v7zm1.1 0L19.45 10a1 1 0 0 1 1.55.83V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10.87a1 1 0 0 1 1.55-.87l6.9 4.59a1 1 0 0 0 1.1 0z" style="fill: none; stroke: #ff5c5c; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;" />
-    </svg>
-    <a href="mailto:">Email</a>
-    <span aria-hidden="true"> | </span>
-    <svg width="19" height="19" viewBox="0 0 20 20" aria-label="GitHub图标">
-      <path d="M94 7399c5.523 0 10 4.59 10 10.253 0 4.529-2.862 8.371-6.833 9.728-.507.101-.687-.219-.687-.492 0-.338.012-1.442.012-2.814 0-.956-.32-1.58-.679-1.898 2.227-.254 4.567-1.121 4.567-5.059 0-1.12-.388-2.034-1.03-2.752-.104-.259-.447-1.302.008-2.714 0 0-.838-.275-2.747 1.026-.227 1.882-.341 2.732-.345.85-.004 1.705.118 2.503.345 1.911-1.326 2.751-1.601 2.751-1.601.892 1.567-.556 1.639-1.556 1.639 0-.244-.186-.561-.685-.656-.974-.013-1.949 0-1.949 1.372 0 .857.009 1.665.014 1.909 0 .271-.184.588-.683.493-3.974-1.355-6.839-5.199-6.839-9.729 0-5.663 4.478-10.253 10-10.253" transform="translate(-84 -7399)" fill="#f74b4b" />
-    </svg>
-    <a href="">GitHub</a>
-  </div>
-</section>
+    <div class="main-container">
+    <!-- 抬头 -->
+    <div class="header">
+        <div class="header-top">
+            <div class="lang">
+                <a href="/Blog/index-zh.html" class="lang-link active">ZH</a>
+                <a href="/Blog/index-en.html" class="lang-link">EN</a>
+            </div>
+        </div>
+        <div class="header-middle">
+            <h1>An Dabe</h1>
+            <p>"seize the day, gather ye rosebuds while ye may."</p>
+        </div>
+        <div class="header-bottom">
+            <div class="header-bottom-nav">
+                <ul>
+                    <li><a href="/Blog/">首页</a></li>
+                    <li><a href="/Blog/fragments">分类</a></li>
+                    <li><a href="/Blog/friends">友邻</a></li>
+                    <li><a href="/Blog/tags">标签</a></li>
+                    <li><a href="/Blog/bookshelf">书架</a></li>
+                    <li><a href="/Blog/about">关于</a></li>
+                </ul>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="搜索...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- 关于页面内容 -->
+    <div class="article">
+        <h2>关于我</h2>
+        <p>你好！我是 Dayu，欢迎来到 An Dabe。这是一个记录我生活点滴、技术笔记和兴趣爱好的小站。</p>
+        <p>我喜欢探索新事物，无论是技术、书籍还是生活中的小美好。希望这个博客能成为一个分享和交流的空间。</p>
+        <p>如果你有任何问题或建议，欢迎通过邮箱联系我：<a href="mailto:your-email@example.com">your-email@example.com</a>。</p>
+    </div>
+
+    <!-- 页尾 -->
+    <footer class="footer">
+        <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
+        <p><a href="/Blog/analytics">Analytics</a> ﹒ <a href="/Blog/rss">RSS</a></p>
+    </footer>
+</div>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" title="回到顶部">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const langLinks = document.querySelectorAll('.lang-link');
+        const savedLang = localStorage.getItem('lang') || 'zh';
+
+        langLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.textContent.toLowerCase() === savedLang) {
+                link.classList.add('active');
+            }
+
+            link.addEventListener('click', (e) => {
+                langLinks.forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+                localStorage.setItem('lang', e.target.textContent.toLowerCase());
+            });
+        });
+
+        const backToTopButton = document.querySelector('.back-to-top');
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+    });
+</script>
 </body>
 </html>
