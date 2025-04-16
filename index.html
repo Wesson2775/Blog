@@ -73,30 +73,6 @@ title: An Dabe
             {% endif %}
         </ul>
     </div>
-    <!-- 分页导航 -->
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="prev">上一页</a>
-  {% else %}
-    <span class="prev disabled">上一页</span>
-  {% endif %}
-
-  {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      <span class="current">{{ page }}</span>
-    {% elsif page == 1 %}
-      <a href="{{ '/' | relative_url }}">{{ page }}</a>
-    {% else %}
-      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
-    {% endif %}
-  {% endfor %}
-
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">下一页</a>
-  {% else %}
-    <span class="next disabled">下一页</span>
-  {% endif %}
-</div>
     <footer class="footer">
         <p>© 2021 - {{ 'now' | date: "%Y" }} Dayu ﹒ CC BY-NC-ND 4.0</p>
         <p><a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ <a href="{{ '/rss' | relative_url }}">RSS</a></p>
