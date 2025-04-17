@@ -1,4 +1,7 @@
 <footer class="footer">
-    <p>© {{ site.time | date: '%Y' }} {{ site.author }} ﹒ CC BY-NC-ND 4.0</p>
-    <p><a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+    <p>© {{ site.data.config.start_year }} - {{ 'now' | date: '%Y' }} {{ site.author }} ﹒ {{ site.data.config.license }}</p>
+    <p>
+        <a href="{{ '/analytics' | relative_url }}">Analytics</a> ﹒ 
+        <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </p>
 </footer>

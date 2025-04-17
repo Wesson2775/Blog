@@ -2,7 +2,7 @@
 layout: null
 ---
 [
-  {% for post in site.posts %}
+  {% for post in site.fragments %}
     {
       "title": {{ post.title | jsonify }},
       "url": {{ post.url | relative_url | jsonify }},

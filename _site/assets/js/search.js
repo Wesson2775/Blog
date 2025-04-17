@@ -1,56 +1,43 @@
-class Search {
-    constructor() {
-        this.input = document.getElementById('search-input');
-        this.results = document.getElementById('search-results');
-        this.index = null;
-        
-        this.init();
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const searchIcon = document.querySelector('.search-icon');
+
+    // 检查搜索框是否存在
+    if (!searchInput || !searchIcon) {
+        console.log('搜索框未找到，当前页面:', window.location.pathname);
+        return;
     }
 
-    async init() {
-        await this.loadIndex();
-        this.setupEvents();
-    }
+    // 使用硬编码路径
+    const searchPagePath = '/Blog/search';
+    const isFragmentsPage = window.location.pathname.includes('/fragments/');
+    const searchJsonPath = isFragmentsPage ? '/Blog/fragments-search.json' : '/Blog/search.json';
 
-    async loadIndex() {
-        const response = await fetch('/search.json');
-        this.posts = await response.json();
-    }
-
-    setupEvents() {
-        this.input.addEventListener('input', () => this.handleSearch());
-        document.addEventListener('click', (e) => {
-            if (!this.results.contains(e.target) && e.target !== this.input) {
-                this.results.innerHTML = '';
-            }
-        });
-    }
-
-    handleSearch() {
-        const query = this.input.value.trim().toLowerCase();
-        if (query.length < 2) {
-            this.results.innerHTML = '';
-            return;
+    // 处理搜索跳转
+    const handleSearchRedirect = () => {
+        const query = searchInput.value.trim();
+        if (query.length >= 2) {
+            const url = `${searchPagePath}?q=${encodeURIComponent(query)}&type=${isFragmentsPage ? 'fragments' : 'posts'}`;
+            console.log('跳转到搜索结果页面:', url);
+            window.location.href = url;
         }
+    };
 
-        const matches = this.posts.filter(post => 
-            post.title.toLowerCase().includes(query) || 
-            post.content.toLowerCase().includes(query)
-        );
+    // 处理回车键
+    const handleKeydown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSearchRedirect();
+        }
+    };
 
-        this.displayResults(matches);
-    }
-
-    displayResults(results) {
-        this.results.innerHTML = results.length 
-            ? results.map(post => `
-                <article class="search-result">
-                    <h3><a href="${post.url}">${post.title}</a></h3>
-                    <p>${post.excerpt || post.content.substring(0, 100)}...</p>
-                </article>
-              `).join('')
-            : '<p class="no-results">未找到匹配内容</p>';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => new Search());
+    // 事件监听
+    searchInput.addEventListener('keydown', handleKeydown);
+    searchIcon.addEventListener('click', handleSearchRedirect);
+    searchIcon.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleSearchRedirect();
+        }
+    });
+});

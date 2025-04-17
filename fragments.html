@@ -2,27 +2,68 @@
 layout: default
 title: 随笔
 ---
-<!-- 随笔内容 -->
 <div class="article">
-    <ul>
-        {% assign fragments = site.fragments | sort: 'date' | reverse %}
-        {% for fragment in fragments %}
-        <li>
+    <h2>随笔</h2>
+    {% if site.fragments.size > 0 %}
+        {% assign posts_per_page = 15 %}
+        {% assign all_posts = site.fragments | sort: 'date' | reverse %}
+        {% assign total_posts = all_posts | size %}
+        {% assign total_pages = total_posts | divided_by: posts_per_page | ceil %}
+
+        {% assign current_page = page.url | split: '/page/' | last | default: '1' %}
+        {% if current_page == '1' and page.url != '/fragments/' %}
+            {% assign current_page = '1' %}
+        {% else %}
+            {% assign current_page = current_page | split: '/' | first %}
+        {% endif %}
+        {% assign current_page = current_page | plus: 0 %}
+
+        {% assign start_index = current_page | minus: 1 | times: posts_per_page %}
+        {% assign end_index = start_index | plus: posts_per_page | minus: 1 %}
+
+        {% for post in all_posts offset:start_index limit:posts_per_page %}
+        <article class="article-content">
+            <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
             <div class="article-data">
-                <div class="article-data-date">
-                    <p>{{ fragment.date | date: "%Y/%m/%d" }}</p>
-                </div>
-                <div class="article-data-tag">
-                    <p>{{ fragment.tags | join: ", " }}</p>
-                </div>
+                <span class="article-data-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+                {% if post.tags %}
+                <ul class="tag-list">
+                    {% for tag in post.tags %}
+                    <li><a href="{{ '/tags' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
-            <div class="article-content">
-                <a href="{{ fragment.url | relative_url }}">
-                    <h2>{{ fragment.title }}</h2>
-                </a>
-                <p>{{ fragment.content | strip_html | truncate: 150 }}</p>
-            </div>
-        </li>
+            <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        </article>
         {% endfor %}
-    </ul>
+
+        {% if total_pages > 1 %}
+        <div class="page-nav">
+            <ul>
+                {% if current_page > 1 %}
+                <li><a href="{{ '/fragments' | relative_url }}{% if current_page > 2 %}/page/{{ current_page | minus: 1 }}{% endif %}">上一页</a></li>
+                {% else %}
+                <li><span class="disabled">上一页</span></li>
+                {% endif %}
+
+                {% for page in (1..total_pages) %}
+                {% if page == current_page %}
+                <li><a href="#" class="active">{{ page }}</a></li>
+                {% else %}
+                <li><a href="{{ '/fragments' | relative_url }}{% if page > 1 %}/page/{{ page }}{% endif %}">{{ page }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if current_page < total_pages %}
+                <li><a href="{{ '/fragments/page/' | append: current_page | plus: 1 | relative_url }}">下一页</a></li>
+                {% else %}
+                <li><span class="disabled">下一页</span></li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    {% else %}
+        <p class="no-results">暂无随笔内容</p>
+    {% endif %}
 </div>

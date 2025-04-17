@@ -4,17 +4,17 @@ layout: default
 <div class="tag-page">
     <h2>标签: {{ page.tag }}</h2>
     <ul class="post-list">
-    {% assign sorted_posts = site.posts | where: 'tags', page.tag | sort: 'date' | reverse %}
-    {% for post in sorted_posts %}
+        {% assign sorted_posts = site.posts | where: 'tags', page.tag | sort: 'date' | reverse %}
+        {% for post in sorted_posts %}
         <li>
             <article>
-                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <time datetime="{{ post.date | date_to_xmlschema }}">
                     {{ post.date | date: "%Y/%m/%d" }}
                 </time>
                 <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
             </article>
         </li>
-    {% endfor %}
+        {% endfor %}
     </ul>
 </div>

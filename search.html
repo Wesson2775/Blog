@@ -1,0 +1,75 @@
+---
+layout: default
+title: 搜索结果
+---
+<div class="article">
+    <h2>搜索结果</h2>
+    {% if page.query %}
+        <p>搜索关键词：{{ page.query | escape }}</p>
+    {% endif %}
+    <div id="search-results" aria-live="polite"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const searchResults = document.getElementById('search-results');
+
+    // 使用硬编码路径
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q')?.trim().toLowerCase() || '';
+    const searchType = urlParams.get('type') || 'posts';
+    const searchJsonPath = searchType === 'fragments' ? '/Blog/fragments-search.json' : '/Blog/search.json';
+
+    if (query) {
+        try {
+            console.log('尝试加载:', searchJsonPath);
+            const res = await fetch(searchJsonPath);
+            if (!res.ok) throw new Error(`无法加载 ${searchJsonPath}，状态: ${res.status}`);
+            const posts = await res.json();
+            console.log(`${searchJsonPath} 加载成功:`, posts.length, '条记录');
+
+            // 模糊搜索和排序
+            const terms = query.split(/\s+/);
+            const results = posts
+                .map(post => {
+                    let score = 0;
+                    const title = post.title.toLowerCase();
+                    const content = post.content.toLowerCase();
+                    terms.forEach(term => {
+                        if (title.includes(term)) score += 10;
+                        if (content.includes(term)) score += 1;
+                    });
+                    return { post, score };
+                })
+                .filter(item => item.score > 0)
+                .sort((a, b) => b.score - a.score)
+                .map(item => item.post);
+
+            // 高亮关键词
+            const highlightText = (text) => {
+                let result = text;
+                terms.forEach(term => {
+                    const regex = new RegExp(`(${term})`, 'gi');
+                    result = result.replace(regex, '<mark>$1</mark>');
+                });
+                return result;
+            };
+
+            // 渲染结果
+            searchResults.innerHTML = results.length
+                ? results.map(post => `
+                    <div class="search-result-item">
+                        <h3><a href="${post.url}">${highlightText(post.title)}</a></h3>
+                        <p>${highlightText(post.excerpt || post.content.substring(0, 150))}...</p>
+                    </div>
+                `).join('')
+                : '<p class="no-results">未找到匹配内容</p>';
+        } catch (error) {
+            console.error('加载搜索索引失败:', error);
+            searchResults.innerHTML = '<p class="no-results">搜索出错，请稍后重试</p>';
+        }
+    } else {
+        searchResults.innerHTML = '<p class="no-results">请输入搜索关键词</p>';
+    }
+});
+</script>

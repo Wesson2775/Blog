@@ -1,5 +1,7 @@
 title: An Dabe
 description: Seize the day, gather ye rosebuds while ye may.
+author: Dayu
+email: your-email@example.com
 baseurl: "/Blog"
 url: "https://wesson2775.github.io"
 markdown: kramdown
@@ -7,37 +9,34 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-paginate
-
 search:
   enabled: true
-
 collections:
   fragments:
     output: true
     permalink: /fragments/:path/
-
 defaults:
   - scope:
       path: "_posts"
       type: posts
     values:
       layout: post
-      permalink: /posts/:slug/ # 使用Front Matter中的title生成URL
+      permalink: /posts/:slug/
   - scope:
       path: "_fragments"
       type: fragments
     values:
       layout: fragments
-
-# 分页配置
-paginate: 5
-paginate_path: "/page/:num/"
-
-# 确保Jekyll不依赖文件名日期
+      collection: fragments
+  - scope:
+      path: "search.html"
+      type: pages
+    values:
+      layout: default
+  - scope:
+      path: "fragments.html"
+      type: pages
+    values:
+      layout: default
 posts:
-  filename_date: false  # 禁用文件名日期解析
-
-jekyll_get_json:
-  - data: posts
-    type: posts
-    file: search.json
+  filename_date: false
