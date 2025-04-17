@@ -63,11 +63,13 @@ body {
 .header-middle h1 {
     font-size: 2em;
     margin: 0;
+    color: #ebebeb;
 }
 
 .header-middle p {
     font-size: 1em;
     margin: 0;
+    color: #ebebeb;
 }
 
 .header-bottom {
