@@ -1,7 +1,7 @@
 <div class="header">
     <div class="header-top">
         <div class="lang">
-            <a href="{{ '/' | relative_url }}" class="lang-link active">ZH</a>
+            <a href="{{ '/index-zh.html' | relative_url }}" class="lang-link active">ZH</a>
             <a href="{{ '/index-en.html' | relative_url }}" class="lang-link">EN</a>
         </div>
     </div>
@@ -19,17 +19,5 @@
                 <li><a href="{{ '/about' | relative_url }}">关于</a></li>
             </ul>
         </nav>
-        {% assign baseurl = site.baseurl | default: '' %}
-        {% assign current_path = page.url | remove: baseurl %}
-        {% if current_path == '/' or current_path contains '/fragments' %}
-        <div class="search-container">
-            <form id="search-form" action="{{ '/search' | relative_url }}" method="get">
-                <input type="text" id="search-input" name="q" placeholder="搜索..." aria-label="搜索">
-                <button type="submit" class="search-icon" aria-label="执行搜索">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
-        {% endif %}
     </div>
 </div>

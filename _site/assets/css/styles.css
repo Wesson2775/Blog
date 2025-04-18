@@ -1,325 +1,63 @@
-/* 重置默认样式 */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
-a {
-    text-decoration: none;
-}
-
-ul {
-    list-style: none; /* 移除所有列表的默认样式 */
-}
-
-body {
-    background: url('/Blog/assets/images/background.png') no-repeat center/cover;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    color: #ebebeb;
-}
-
-.main-container {
-    width: 794px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.header {
-    width: 100%;
-    max-width: 794px; /* 严格限制头部宽度 */
-}
-
-.header-top {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 0;
-}
-
-.header-top .lang a {
-    font-size: 10px;
-    font-weight: 600;
-    padding-left: 15px;
-    color: #ebebeb;
-    transition: color 0.3s ease;
-}
-
-.header-top .lang a:hover, .header-top .lang a.active {
-    color: #dd3737;
-}
-
-.header-middle {
-    height: 163px;
-    font-family: 'Times New Roman', Times, serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left; /* 左对齐 */
-    padding-left: 10px;
-}
-
-.header-middle h1 {
-    font-size: 2em;
-    margin: 0;
-}
-
-.header-middle p {
-    font-size: 1em;
-    margin: 0;
-}
-
-.header-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    max-width: 794px; /* 严格限制宽度 */
-    flex-wrap: wrap;
-    gap: 10px; /* 防止挤压 */
-}
-
-.header-bottom-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.header-bottom-nav li {
-    margin-right: 15px; /* 减小间距 */
-}
-
-.header-bottom-nav li a {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ebebeb;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.header-bottom-nav li a:hover {
-    color: #dd3737;
-}
-
-.header-bottom-nav li a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background-color: #dd3737;
-    transition: width 0.3s ease;
-}
-
-.header-bottom-nav li a:hover::after {
-    width: 100%;
-}
-
-.search-container {
-    width: 120px !important; /* 强制宽度 */
-    height: 20px;
-    position: relative;
-    flex-shrink: 0;
-}
-
-.search-input {
-    width: 120px !important; /* 强制宽度 */
-    height: 100%;
-    padding: 1px 20px 1px 5px;
-    background-color: #faf1e6;
-    border: 1px solid #d1d0d0;
-    border-radius: 6px;
-    font-size: 9px;
-    box-sizing: border-box;
-}
-
+/* 现有样式（保持不变，示例） */
 .search-icon {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-    font-size: 10px;
     cursor: pointer;
-    pointer-events: auto;
-    transition: color 0.3s ease;
+    transition: all 0.4s ease;
 }
-
 .search-icon:hover {
-    color: #dd3737;
+    color: red;
 }
-
-.search-input:focus {
-    border-color: #d8d8d8;
-    outline: none;
+.search-icon.animate {
+    transform: translateY(4px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 .search-result-item {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 1.5em;
+}
+.search-result-tags .tag {
+    display: inline-block;
+    margin-right: 0.5em;
+    padding: 0.2em 0.5em;
+    background: #f0f0f0;
+    border-radius: 3px;
+}
+.search-result-date {
+    color: #666;
+    font-size: 0.9em;
 }
 
-.search-result-item:last-child {
-    border-bottom: none;
-}
-
-.search-result-item a {
-    color: #ebebeb;
-    font-weight: 600;
-    display: block;
-}
-
-.search-result-item h3 {
-    margin: 0;
-    font-size: 16px;
-}
-
-.search-result-item p {
-    color: #999;
-    font-size: 12px;
-    margin: 5px 0 0;
-}
-
-.search-result-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.search-result-item mark {
-    background-color: #dd3737;
-    color: #fff;
-    padding: 0 2px;
-}
-
-.no-results {
-    padding: 10px 0;
-    color: #999;
-    font-size: 12px;
-}
-
-.article-data {
-    color: #dd3737;
-    font-size: 10px;
-    display: flex;
-    padding: 10px 0;
-}
-
-.article-data-date {
-    padding-right: 20px;
-}
-
-.article-content h2 {
-    color: #ebebeb;
-    transition: color 0.3s ease;
-}
-
-.article-content h2:hover {
-    color: #dd3737;
-}
-
-.article-content p {
-    color: #999;
-    font-size: 13px;
-}
-
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.tag-list li a {
-    padding: 5px 10px;
-    background-color: #333;
-    color: #ebebeb;
-    border-radius: 5px;
-    font-size: 12px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.tag-list li a:hover {
-    background-color: #dd3737;
-    color: #fff;
-}
-
-.page-nav {
-    margin: 20px 0;
+/* 新增分页样式 */
+.pagination {
+    margin-top: 2em;
     text-align: center;
 }
-
-.page-nav ul {
+.pagination-list {
+    list-style: none;
+    padding: 0;
     display: inline-flex;
-    align-items: center;
+    gap: 0.5em;
 }
-
-.page-nav li {
-    margin-right: 10px;
+.pagination-link {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #333;
+    background: #fff;
+    transition: background 0.2s, color 0.2s;
 }
-
-.page-nav a {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ebebeb;
-    padding: 5px 10px;
-    transition: color 0.3s ease;
+.pagination-link:hover:not(.disabled) {
+    background: #f0f0f0;
+    color: #000;
 }
-
-.page-nav a:hover, .page-nav a.active {
-    color: #dd3737;
+.pagination-link.active {
+    background: #333;
+    color: #fff;
+    border-color: #333;
 }
-
-.page-nav .disabled {
-    color: #666;
-    pointer-events: none;
+.pagination-link.disabled {
+    color: #999;
+    border-color: #eee;
     cursor: not-allowed;
-}
-
-.back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background-color: #ebebeb;
-    color: #666;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    z-index: 1000;
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    background-color: #dd3737;
-    color: #ebebeb;
-}
-
-.footer {
-    text-align: center;
-    margin: 20px 0;
-    color: #ebebeb;
-    font-size: 10px;
-    line-height: 1.5;
-}
-
-.footer a {
-    color: #ebebeb;
-    transition: color 0.3s ease;
-}
-
-.footer a:hover {
-    color: #dd3737;
 }

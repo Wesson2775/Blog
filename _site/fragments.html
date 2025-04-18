@@ -11,96 +11,88 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="header">
-    <div class="header-top">
-        <div class="lang">
-            <a href="/Blog/" class="lang-link active">ZH</a>
-            <a href="/Blog/index-en.html" class="lang-link">EN</a>
-        </div>
-    </div>
-    <div class="header-middle">
-        <h1>An Dabe</h1>
-        <p>Seize the day, gather ye rosebuds while ye may.</p>
-    </div>
-    <div class="header-bottom">
-        <nav class="header-bottom-nav">
-            <ul>
-                <li><a href="/Blog/">首页</a></li>
-                <li><a href="/Blog/fragments">随笔</a></li>
-                <li><a href="/Blog/friends">友邻</a></li>
-                <li><a href="/Blog/tags">标签</a></li>
-                <li><a href="/Blog/about">关于</a></li>
-            </ul>
-        </nav>
-        
-        
-        
-        <div class="search-container">
-            <form id="search-form" action="/Blog/search" method="get">
-                <input type="text" id="search-input" name="q" placeholder="搜索..." aria-label="搜索">
-                <button type="submit" class="search-icon" aria-label="执行搜索">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
-        
-    </div>
-</div>
+        <header class="header">
+            <div class="header-top">
+                <div class="lang">
+                    <a href="/Blog/index-zh.html" class="lang-link active">ZH</a>
+                    <a href="/Blog/index-en.html" class="lang-link">EN</a>
+                </div>
+            </div>
+            <div class="header-middle">
+                <h1>An Dabe</h1>
+                <p>Seize the day, gather ye rosebuds while ye may.</p>
+            </div>
+            <div class="header-bottom">
+                <nav class="header-bottom-nav">
+                    <ul>
+                        <li><a href="/Blog/">首页</a></li>
+                        <li><a href="/Blog/fragments">随笔</a></li>
+                        <li><a href="/Blog/friends">友邻</a></li>
+                        <li><a href="/Blog/tags">标签</a></li>
+                        <li><a href="/Blog/about">关于</a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="搜索..." aria-label="搜索">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+        </header>
         <main class="content">
             <div class="article">
     <h2>随笔</h2>
-    
+    <div class="fragments-list">
         
         
-        
-        
+        <div class="fragment-item">
+            <div class="fragment-date">
+                <p>2024/09/04</p>
+            </div>
+            <div class="fragment-content">
+                <p>今天阳光明媚，微风轻轻吹过，感觉整个世界都充满了生机。坐在窗边，喝着一杯咖啡，思绪飘向远方，想起那些过去的日子，仿佛还在眼前。</p>
 
-        
-        
-        
+<p>这是一个简单的随笔，记录生活中的点滴美好。</p>
 
+            </div>
+        </div>
         
-        
-
-        
-
-        
-    
+    </div>
 </div>
         </main>
         <footer class="footer">
-    <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
-    <p>
-        <a href="/Blog/analytics">Analytics</a> ﹒ 
-        <a href="/Blog/feed.xml">RSS</a>
-    </p>
-</footer>
+            <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
+            <p>
+                <a href="/Blog/analytics">Analytics</a> ﹒ 
+                <a href="/Blog/feed.xml">RSS</a>
+            </p>
+        </footer>
     </div>
     <button class="back-to-top" aria-label="返回顶部">
         <i class="fas fa-arrow-up"></i>
     </button>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const langLinks = document.querySelectorAll('.lang-link');
-            const savedLang = localStorage.getItem('lang') || 'zh';
-            
-            langLinks.forEach(link => {
-                link.classList.toggle('active', link.textContent.toLowerCase() === savedLang);
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.setItem('lang', e.target.textContent.toLowerCase());
-                    window.location.href = e.target.href;
-                });
-            });
-
-            const backToTop = document.querySelector('.back-to-top');
-            window.addEventListener('scroll', () => {
-                backToTop.classList.toggle('visible', window.scrollY > 300);
-            });
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.addEventListener('DOMContentLoaded', () => {
+        const langLinks = document.querySelectorAll('.lang-link');
+        const savedLang = localStorage.getItem('lang') || 'zh';
+        
+        langLinks.forEach(link => {
+            if (link.textContent.toLowerCase() === savedLang) {
+                link.classList.add('active');
+            }
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.setItem('lang', e.target.textContent.toLowerCase());
+                window.location.href = e.target.href;
             });
         });
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
     </script>
 </body>
 </html>

@@ -11,32 +11,33 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="header">
-    <div class="header-top">
-        <div class="lang">
-            <a href="/Blog/" class="lang-link active">ZH</a>
-            <a href="/Blog/index-en.html" class="lang-link">EN</a>
-        </div>
-    </div>
-    <div class="header-middle">
-        <h1>An Dabe</h1>
-        <p>Seize the day, gather ye rosebuds while ye may.</p>
-    </div>
-    <div class="header-bottom">
-        <nav class="header-bottom-nav">
-            <ul>
-                <li><a href="/Blog/">首页</a></li>
-                <li><a href="/Blog/fragments">随笔</a></li>
-                <li><a href="/Blog/friends">友邻</a></li>
-                <li><a href="/Blog/tags">标签</a></li>
-                <li><a href="/Blog/about">关于</a></li>
-            </ul>
-        </nav>
-        
-        
-        
-    </div>
-</div>
+        <header class="header">
+            <div class="header-top">
+                <div class="lang">
+                    <a href="/Blog/index-zh.html" class="lang-link active">ZH</a>
+                    <a href="/Blog/index-en.html" class="lang-link">EN</a>
+                </div>
+            </div>
+            <div class="header-middle">
+                <h1>An Dabe</h1>
+                <p>Seize the day, gather ye rosebuds while ye may.</p>
+            </div>
+            <div class="header-bottom">
+                <nav class="header-bottom-nav">
+                    <ul>
+                        <li><a href="/Blog/">首页</a></li>
+                        <li><a href="/Blog/fragments">随笔</a></li>
+                        <li><a href="/Blog/friends">友邻</a></li>
+                        <li><a href="/Blog/tags">标签</a></li>
+                        <li><a href="/Blog/about">关于</a></li>
+                    </ul>
+                </nav>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="搜索..." aria-label="搜索">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+        </header>
         <main class="content">
             <article class="article">
     <h1>Manifest V3 之后如何屏蔽广告：NextDNS</h1>
@@ -48,51 +49,55 @@
             
             <a href="/Blog/tags/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0">#技术笔记</a>
             
+            <a href="/Blog/tags/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA">#广告拦截</a>
+            
+            <a href="/Blog/tags/NextDNS">#NextDNS</a>
+            
         </span>
     </div>
     <div class="article-content">
         <p>谷歌更新 Chrome Manifest V3 之后，很多广告拦截浏览器插件都渐渐无法正常使用，包括之前提过的 uBlock Origin。如果想要正常使用有以下几个方式：</p>
 
 <h3 id="nextdns">NextDNS</h3>
-
 <p>本文想聊 NextDNS，一款注重隐私和安全的现代 DNS 服务，提供广告和跟踪器拦截、恶意软件防护、家长控制以及高度可定制的过滤功能，支持所有设备和加密协议（…</p>
 
     </div>
 </article>
         </main>
         <footer class="footer">
-    <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
-    <p>
-        <a href="/Blog/analytics">Analytics</a> ﹒ 
-        <a href="/Blog/feed.xml">RSS</a>
-    </p>
-</footer>
+            <p>© 2021 - 2025 Dayu ﹒ CC BY-NC-ND 4.0</p>
+            <p>
+                <a href="/Blog/analytics">Analytics</a> ﹒ 
+                <a href="/Blog/feed.xml">RSS</a>
+            </p>
+        </footer>
     </div>
     <button class="back-to-top" aria-label="返回顶部">
         <i class="fas fa-arrow-up"></i>
     </button>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const langLinks = document.querySelectorAll('.lang-link');
-            const savedLang = localStorage.getItem('lang') || 'zh';
-            
-            langLinks.forEach(link => {
-                link.classList.toggle('active', link.textContent.toLowerCase() === savedLang);
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    localStorage.setItem('lang', e.target.textContent.toLowerCase());
-                    window.location.href = e.target.href;
-                });
-            });
-
-            const backToTop = document.querySelector('.back-to-top');
-            window.addEventListener('scroll', () => {
-                backToTop.classList.toggle('visible', window.scrollY > 300);
-            });
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.addEventListener('DOMContentLoaded', () => {
+        const langLinks = document.querySelectorAll('.lang-link');
+        const savedLang = localStorage.getItem('lang') || 'zh';
+        
+        langLinks.forEach(link => {
+            if (link.textContent.toLowerCase() === savedLang) {
+                link.classList.add('active');
+            }
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.setItem('lang', e.target.textContent.toLowerCase());
+                window.location.href = e.target.href;
             });
         });
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
     </script>
 </body>
 </html>
