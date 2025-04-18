@@ -3,7 +3,7 @@ layout: default
 title: 标签
 ---
 <div class="article">
-    <h2>标签</h2>
+    <h3>标签</h3>
     <ul class="tag-list">
         {% assign all_tags = site.posts | map: "tags" | flatten | uniq | sort %}
         {% for tag in all_tags %}

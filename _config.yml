@@ -1,165 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 搜索图标动画和跳转
-    const searchIcon = document.querySelector('.search-icon');
-    const searchInput = document.querySelector('#search-input');
+title: An Dabee
+description: Seize the day, gather ye rosebuds while ye may.
+baseurl: "/Blog"
+url: "https://wesson2775.github.io"
+author: Dayu
+start_year: 2021
+license: CC BY-NC-ND 4.0
+email: your-email@example.com
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
 
-    if (searchIcon && searchInput) {
-        console.log('搜索图标和输入框已找到，正在绑定点击事件');
-        const handleSearch = (event) => {
-            event.preventDefault();
-            console.log('搜索图标被点击或触摸');
-            searchIcon.classList.add('animate');
-            const query = searchInput.value.trim();
-            console.log('搜索关键词:', query);
-            setTimeout(() => {
-                searchIcon.classList.remove('animate');
-                if (query) {
-                    const baseUrl = '/Blog';
-                    const searchUrl = `${baseUrl}/search.html?q=${encodeURIComponent(query)}`;
-                    console.log('即将跳转到:', searchUrl);
-                    window.location.href = searchUrl;
-                } else {
-                    console.log('关键词为空，不跳转');
-                }
-            }, 400);
-        };
-        searchIcon.addEventListener('click', handleSearch);
-        searchIcon.addEventListener('touchstart', handleSearch);
-    } else {
-        console.error('未找到搜索图标或输入框');
-    }
+search:
+  enabled: true
 
-    // 搜索结果页面逻辑
-    const searchResultsContainer = document.querySelector('#search-results');
-    const searchQueryElement = document.querySelector('#search-query');
-    const paginationContainer = document.querySelector('#pagination');
-    if (searchResultsContainer && searchQueryElement && paginationContainer) {
-        console.log('搜索结果页面已加载');
-        const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('q')?.toLowerCase() || '';
-        const currentPage = parseInt(urlParams.get('page') || '1', 10);
-        const itemsPerPage = 10; // 每页显示 10 条结果
+collections:
+  fragments:
+    output: false
+    permalink: /fragments/:path/
 
-        searchQueryElement.textContent = query ? `“${query}” 的搜索结果` : '搜索结果';
+defaults:
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      permalink: /posts/:slug/
+  - scope:
+      path: "_fragments"
+      type: fragments
+    values:
+      layout: fragments
 
-        const postsJsonUrl = '/Blog/posts.json';
-        console.log('尝试加载:', postsJsonUrl);
-        fetch(postsJsonUrl)
-            .then(response => {
-                console.log('posts.json 请求状态:', response.status);
-                if (!response.ok) {
-                    console.error('posts.json 加载失败，尝试备用路径: /posts.json');
-                    return fetch('/posts.json');
-                }
-                return response;
-            })
-            .then(response => {
-                if (!response.ok) throw new Error(`无法加载 posts.json，状态码: ${response.status}`);
-                return response.text();
-            })
-            .then(text => {
-                console.log('posts.json 原始内容（前 500 字符）:', text.substring(0, 500));
-                try {
-                    const posts = JSON.parse(text);
-                    console.log('文章数据已加载:', posts);
-                    const results = posts.filter(post => 
-                        post.title?.toLowerCase().includes(query) ||
-                        post.content?.toLowerCase().includes(query) ||
-                        post.tags?.some(tag => tag.toLowerCase().includes(query))
-                    );
-                    console.log('搜索结果:', results);
+paginate: 5
+paginate_path: "/page/:num/"
 
-                    // 分页逻辑
-                    const totalItems = results.length;
-                    const totalPages = Math.ceil(totalItems / itemsPerPage);
-                    const startIndex = (currentPage - 1) * itemsPerPage;
-                    const endIndex = startIndex + itemsPerPage;
-                    const currentResults = results.slice(startIndex, endIndex);
-
-                    // 渲染当前页结果
-                    searchResultsContainer.innerHTML = currentResults.length > 0
-                        ? currentResults.map(post => `
-                            <div class="search-result-item">
-                                <div class="search-result-tags">
-                                    ${post.tags?.map(tag => `<a href="/Blog/tags/${tag}" class="tag">${tag}</a>`).join(' ') || ''}
-                                </div>
-                                <h3><a href="${post.url}">${post.title}</a></h3>
-                                <p>${post.content?.substring(0, 150)}...</p>
-                                <div class="search-result-date">${post.date}</div>
-                            </div>
-                        `).join('')
-                        : '<p class="no-results">未找到匹配内容</p>';
-
-                    // 渲染分页导航
-                    if (totalItems > 0) {
-                        let paginationHtml = '<ul class="pagination-list">';
-                        
-                        // 上一页
-                        paginationHtml += `
-                            <li>
-                                <a href="#" class="pagination-link ${currentPage === 1 ? 'disabled' : ''}" 
-                                   data-page="${currentPage - 1}" ${currentPage === 1 ? 'aria-disabled="true"' : ''}>
-                                    上一页
-                                </a>
-                            </li>
-                        `;
-
-                        // 页码（显示当前页和附近页码）
-                        const maxPagesToShow = 5;
-                        let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
-                        let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
-                        if (endPage - startPage + 1 < maxPagesToShow) {
-                            startPage = Math.max(1, endPage - maxPagesToShow + 1);
-                        }
-
-                        for (let i = startPage; i <= endPage; i++) {
-                            paginationHtml += `
-                                <li>
-                                    <a href="#" class="pagination-link ${i === currentPage ? 'active' : ''}" 
-                                       data-page="${i}">${i}</a>
-                                </li>
-                            `;
-                        }
-
-                        // 下一页
-                        paginationHtml += `
-                            <li>
-                                <a href="#" class="pagination-link ${currentPage === totalPages ? 'disabled' : ''}" 
-                                   data-page="${currentPage + 1}" ${currentPage === totalPages ? 'aria-disabled="true"' : ''}>
-                                    下一页
-                                </a>
-                            </li>
-                        `;
-
-                        paginationHtml += '</ul>';
-                        paginationContainer.innerHTML = paginationHtml;
-
-                        // 分页点击事件
-                        paginationContainer.querySelectorAll('.pagination-link:not(.disabled)').forEach(link => {
-                            link.addEventListener('click', (e) => {
-                                e.preventDefault();
-                                const page = parseInt(e.target.dataset.page, 10);
-                                const newUrl = `${window.location.pathname}?q=${encodeURIComponent(query)}&page=${page}`;
-                                window.history.pushState({}, '', newUrl);
-                                window.location.reload(); // 刷新页面以重新加载数据
-                            });
-                        });
-                    } else {
-                        paginationContainer.innerHTML = '';
-                    }
-                } catch (error) {
-                    console.error('JSON 解析失败:', error);
-                    console.log('完整 posts.json 内容:', text);
-                    searchResultsContainer.innerHTML = '<p class="no-results">未找到匹配内容（JSON 解析失败，请检查 posts.json）。</p>';
-                    paginationContainer.innerHTML = '';
-                    return;
-                }
-            })
-            .catch(error => {
-                console.error('加载文章数据失败:', error);
-                console.log('提示: 请检查 _site/Blog/posts.json 是否存在');
-                searchResultsContainer.innerHTML = `<p class="no-results">加载文章失败：${error.message}。请检查 posts.json 或稍后重试。</p>`;
-                paginationContainer.innerHTML = '';
-            });
-    }
-});
+posts:
+  filename_date: false
